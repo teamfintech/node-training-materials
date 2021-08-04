@@ -5,6 +5,8 @@
  */
 
 import * as fs from 'fs/promises';
+import path from 'path';
+import os from 'os';
 
 /**
  * Ex.1 
@@ -70,3 +72,46 @@ async function writeFile() {
 // writeFile();
 
 
+/**
+ * Ex.2
+ * Path module
+ */
+
+// read folders in PATH
+function envPaths() {
+    const paths = process.env.PATH.split(path.delimiter);
+    console.log(paths);
+}
+
+// envPaths();
+
+async function pathJoins() {
+    console.log(process.cwd());
+    const dirname = process.cwd();
+    const gitignore = path.join(dirname, '../.gitignore');
+    console.log(gitignore);
+    const content = await fs.readFile(gitignore, {encoding: 'utf-8'});
+    console.log(content);
+}
+// pathJoins();
+
+
+/**
+ * Ex.3
+ * OS module
+ */
+
+function numOfCpus() {
+    console.log(os.cpus().length);
+}
+
+// numOfCpus();
+
+// network addresses
+function netAddrs() {
+    const interfaces = os.networkInterfaces()
+    interfaces['Wi-Fi'].forEach(i => {
+        console.log(i.address)
+    });
+}
+// netAddrs();
