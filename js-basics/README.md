@@ -1,1 +1,1 @@
-This is basic part
+Hello from core modules
