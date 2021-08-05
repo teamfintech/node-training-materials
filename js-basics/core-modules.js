@@ -8,6 +8,7 @@ import * as fs from 'fs/promises';
 import path from 'path';
 import os from 'os';
 
+
 /**
  * Ex.1 
  * File System module
@@ -17,6 +18,7 @@ import os from 'os';
 async function listFiles() {
     try {
         const files = await fs.readdir('./');
+        // console.log(files);
         for (const f of files) {
             console.log(f);
         }
@@ -30,10 +32,10 @@ async function listFiles() {
 
 // read file using new fs/promises
 async function readFile() {
-    let filehandle;
+    let files;
     try {
-        filehandle = await fs.open('README.md', 'r');
-        const content = await filehandle.readFile({
+        files = await fs.open('README.md', 'r');
+        const content = await files.readFile({
             encoding: 'utf-8'
         });
         console.log(content);
@@ -42,7 +44,7 @@ async function readFile() {
         console.error(err);
     }
     finally {
-        filehandle?.close();
+        files?.close();
         console.log("[INFO] file closed")
     }
 
@@ -54,10 +56,11 @@ async function readFile() {
 async function writeFile() {
     let filehandle;
     try {
-        filehandle = await fs.open('README.md', 'r+');
-        const content = await filehandle.writeFile("Hello from core modules");
-        // const content = await filehandle.appendFile("Hello from core modules");
+        filehandle = await fs.open('README.md', 'a');
+        // const content = await filehandle.writeFile("Hello from core modules!!!");
+        const content = await filehandle.appendFile("Hello from core modules");
         console.log(content);
+        
     }
     catch(err) {
         console.error(err);
@@ -88,9 +91,9 @@ function envPaths() {
 async function pathJoins() {
     console.log(process.cwd());
     const dirname = process.cwd();
-    const gitignore = path.join(dirname, '../.gitignore');
-    console.log(gitignore);
-    const content = await fs.readFile(gitignore, {encoding: 'utf-8'});
+    const gitpath = path.join(dirname, '../.gitignore');
+    console.log(gitpath);
+    const content = await fs.readFile(gitpath, {encoding: 'utf-8'});
     console.log(content);
 }
 // pathJoins();
@@ -110,6 +113,7 @@ function numOfCpus() {
 // network addresses
 function netAddrs() {
     const interfaces = os.networkInterfaces()
+    console.log(interfaces);
     interfaces['Wi-Fi'].forEach(i => {
         console.log(i.address)
     });

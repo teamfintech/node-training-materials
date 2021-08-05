@@ -21,7 +21,7 @@ notificationEventEmitter.addListener('send-email', async function(data) {
     console.log("[INFO] Sending Email with: " + JSON.stringify(data));
 })
 
-
+// in seperate module 
 function myAPI() {
     notificationEventEmitter.emit('send-sms', {
         mobile: "01686087163",
@@ -29,7 +29,15 @@ function myAPI() {
     })
 }
 
-// myAPI();
+
+function myAPI2() {
+    notificationEventEmitter.emit('send-email', {
+        email: "ovi@gamil.com",
+        message: "Something"
+    })
+}
+
+// myAPI2();
 
 /**
  * Ex.2
@@ -62,8 +70,8 @@ function informOtherApp() {
     })
 }
 
-informOtherApp();
-userSerice.create();
+// informOtherApp();
+// userSerice.create();
 // userSerice.update();
 
 
