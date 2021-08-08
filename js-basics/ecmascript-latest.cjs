@@ -33,8 +33,68 @@ const person = {
     } 
 }
 
-console.log(person.concat());
-console.log(person.greeting());
+// console.log(person.concat());
+// console.log(person.greeting());
+
+/**
+ * Ex. 2
+ * Arrow Functions with classes
+ */
+
+class Animal {
+    name = null;
+    constructor(name) {
+        this.name = name;
+    }
+
+    details() {
+        console.log(this.name);
+    }
+
+    greetings = (greet) => {
+        console.log(`${greet} ${this.name}`);
+    }
+}
+
+class Dog extends Animal {
+    legs = 4
+    constructor() {
+        super("Dog")
+    }
+
+    details() {
+        super.details();
+        console.log(this.legs);
+    }
+
+    greetings = (greet) => {
+        super.greetings(greet)
+        console.log(`Which has ${this.legs} legs`)
+    }
+
+}
+
+// const dog1 = new Dog();
+// dog1.details();
+// dog1.greetings("Hi");
+
+
+/**
+ * Ex. 3 
+ * Spread Operator
+ */
+
+const myObj = {
+    name: "nahid",
+    age: 27,
+    religion: "Islam"
+}
+
+const myObj2 = {...myObj};
+
+console.log(myObj2);
+
+console.log(myObj === myObj2);
 
 
 
