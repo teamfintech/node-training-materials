@@ -1,0 +1,42 @@
+1. Code Scope in JS
+ANS: 3 code scope in JS (Block, Local, Global)
+
+// a js funciton
+function main() {
+    // local scope
+}
+
+// a .js file
+Global Scope
+
+// a if or loop or switch Block
+
+if(true) {
+    // block scope
+}
+
+2. Way of variable declaration in JS
+ANS: There are four way of varibale declaration
+
+only name, var, let, const
+
+3. var vs let vs const
+
+var is local and global scoped
+
+let is block scoped
+
+const is block scoped and value is constant can not be changed
+
+4. Why callback function is used in JS
+ANS: For handling the asynchronous events
+
+5. What is promises and what problem promises solve
+ANS: Promises are used to handle asynchronous operation in JS. The purpose Promises serve same as callback
+but Promises help us to avoid callback hells
+
+6. Why node js is single threaded
+ANS: Becasue is processes blocking task asynchronously
+
+7. What is the benefit of nodejs being single threaded
+ANS: Low resource consumption. High throughput 
