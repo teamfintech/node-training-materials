@@ -3,8 +3,12 @@ const userService = require('../services/user.service');
 const router = express.Router();
 
 
-router.get('/', (req, res) => {
-    res.send("User List");
+router.get('/', async (req, res) => {
+    const users = await userService.getUser();
+    return res.status(200).json({
+        message: "Request Successful",
+        data: users
+    })
 })
 
 router.post('/', (req, res) => {
