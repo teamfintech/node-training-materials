@@ -1,9 +1,11 @@
 const db = require('../../db');
 
-function createUser(mobile, password) {
+async function createUser(username, password) {
     console.log("[INFO] I am creating a user"); // insert into user values()
-    const id = Math.floor(Math.random() * 1000);
-    return id;
+    const result = await db.query("INSERT INTO users(username) values($1) RETURNING id",
+        [username]
+    );
+    return result.rows[0].id;
 }
 
 async function getUser() {
