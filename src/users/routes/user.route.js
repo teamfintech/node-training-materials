@@ -1,7 +1,8 @@
 const express = require('express');
 const userService = require('../services/user.service');
 const userValidators = require('../validators/user.validator');
-const { validationResult } = require('express-validator');
+const { validationResult, body } = require('express-validator');
+const { validates } = require('../middlewares/validation.middle');
 
 
 const router = express.Router();
@@ -16,12 +17,8 @@ router.get('/', async (req, res) => {
 })
 
 router.post('/',
-    [...userValidators.createUserSchema],
+    [...userValidators.createUserSchema, validates],
     async (req, res) => {
-        const errors = validationResult(req);
-        if (!errors.isEmpty()) {
-            return res.status(400).json({ errors: errors.array() });
-        }
         const { username, password } = req.body;
         const newIUserId = await userService.createUser(username, password);
         return res.status(201).json({
@@ -29,5 +26,9 @@ router.post('/',
         })
     }
 );
+
+
+
+
 
 module.exports = router;
