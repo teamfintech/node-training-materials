@@ -1,5 +1,5 @@
 const express = require('express');
-const {json} = require('body-parser');
+const { json } = require('body-parser');
 
 // module import
 const userModule = require('./users');
@@ -9,6 +9,11 @@ const app = express();
 
 app.use(json());
 
+
+// process.on("unhandledRejection", (error) => {
+//     console.error("[ERROR] From event: ", error?.toString());
+//     // process.exit(1);
+// });
 /**
  * Register Routes
  */

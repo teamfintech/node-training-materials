@@ -6,6 +6,7 @@ const { validates } = require('../middlewares/validation.middle');
 const fs = require('fs');
 const path = require('path');
 const crypto = require('crypto');
+const { default: axios } = require('axios');
 
 
 const router = express.Router();
@@ -33,6 +34,7 @@ router.post('/',
 
 /**
  * Blocking API
+ * https://nodejs.org/en/docs/guides/dont-block-the-event-loop/
  */
 router.post('/block', (req, res) => {
     const n = parseInt(req.body.number);
@@ -61,6 +63,26 @@ router.post('/block-crypto', (req, res) => {
 })
 
 
-
+/**
+ * Unhandled Promise Rejection Error
+ */
+router.get('/promise-rejection', (req, res) => {
+    try {
+        const filePath = path.join(__dirname, './README.md');
+        fs.readFile(filePath, async (err, data) => {
+            const result = await axios.post('https://jsonplaceholder.typicode.com/posts', {
+                title: "Node Training",
+                body: data.toString('utf8'),
+                userId: 'nahid'
+            })
+            return res.status(201).json(result.data)
+        })
+    }
+    catch (ex) {
+        return res.status(500).json({
+            message: "Internal Server Error"
+        })
+    }
+})
 
 module.exports = router;
