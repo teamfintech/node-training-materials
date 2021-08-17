@@ -85,4 +85,24 @@ router.get('/promise-rejection', (req, res) => {
     }
 })
 
+
+/**
+ * Using Streams for sending large files
+ * https://www.tutorialspoint.com/nodejs/nodejs_streams.htm
+ * https://betterprogramming.pub/video-stream-with-node-js-and-html5-320b3191a6b6
+ * https://medium.com/dev-bits/writing-memory-efficient-software-applications-in-node-js-5575f646b67f
+ */
+router.get('/bigfile', (req, res) => {
+    const filePath = path.join(__dirname, './README.md');
+    const readStream = fs.createReadStream(filePath);
+    res.setHeader('content-type', 'text/plain');
+    res.setHeader("Content-Disposition", 'attachment; filename="README.md"')
+    readStream.pipe(res);
+    readStream.on('end', () => {
+        console.log("[INFO] Unpipe and Send")
+        readStream.unpipe(res);
+        return res.status(200).send();
+    })
+})
+
 module.exports = router;
