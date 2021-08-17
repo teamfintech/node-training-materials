@@ -1,0 +1,20 @@
+Schema:
+    User:
+        1. id // primary key auto generated
+        2. username // unique , validation: greater than 3 and smaller than 20
+        3. password // hash , validation Special character, Small Char, Capital Char, Number, 8 Digit
+        4. mobile // mobile  number unique , validation Internaiton format
+        5. name 
+        6. gender // [M, F, T]
+        7. role // [A, U]
+        one to one relation with user image
+    User_Image
+        1. data // byte array , validation base64 image
+        2. mimeType // 
+
+API:
+    1. Create User with Image
+    2. Get User List with Pagination 
+    3. Get User with ID 
+    4. Update User with Image
+    5. Delete User with Image
