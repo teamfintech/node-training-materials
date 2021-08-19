@@ -32,6 +32,11 @@ router.post('/',
 );
 
 
+router.post('/address', [...userValidators.addressSchema, validates], (req, res) => {
+    return res.status(200).send("Success");
+})
+
+
 /**
  * Blocking API
  * https://nodejs.org/en/docs/guides/dont-block-the-event-loop/
