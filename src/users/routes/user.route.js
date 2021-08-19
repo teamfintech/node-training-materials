@@ -23,6 +23,7 @@ router.get('/', async (req, res) => {
 router.post('/',
     [...userValidators.createUserSchema, validates],
     async (req, res) => {
+        console.log("In Create User.....")
         const { username, password } = req.body;
         const newIUserId = await userService.createUser(username, password);
         return res.status(201).json({
@@ -32,8 +33,15 @@ router.post('/',
 );
 
 
-router.post('/address', [...userValidators.addressSchema, validates], (req, res) => {
-    return res.status(200).send("Success");
+router.post('/address', [...userValidators.addressSchema, validates], (req, res, next) => {
+    setTimeout(() => {
+        try {
+            throw new Error("Some Error");
+        }
+        catch(ex) {
+            next(ex);
+        }
+    }, 2000);
 })
 
 
