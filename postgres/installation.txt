@@ -1,0 +1,38 @@
+1. Resource
+https://www.postgresql.org/download/linux/ubuntu/
+https://www.digitalocean.com/community/tutorials/how-to-install-and-use-postgresql-on-ubuntu-18-04
+https://www.postgresqltutorial.com/psql-commands/
+
+
+2. Introduction
+PostgreSQL is one of the most popular open-source relational database systems. With more than 30 years of development work, 
+PostgreSQL has proven to be a highly reliable and robust database that can handle a large number of complicated data workloads. 
+PostgreSQL is considered to be the primary open-source database choice when migrating from commercial databases such as Oracle.
+
+2. Commands
+
+$ sudo apt-get update
+
+// for installing specific version replace postgres with postgresql-xx (postgresql-12)
+$ sudo apt install postgresql postgresql-contrib 
+
+// change unix user
+$ sudo -i -u postgres
+
+// for connect using psql
+$ psql
+
+// for quit
+# \q
+
+// for list of database
+# \l
+
+// for listing all tables
+# \dt
+
+// for connecting to a database 
+# \c <database name> <user name>
+
+
+
