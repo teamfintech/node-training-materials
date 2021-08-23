@@ -1,0 +1,36 @@
+// Joins in SQL
+1. Left Outer Join
+2. Right Outer Join
+3. Full Outer Join
+4. Inner Join
+5. Self Join
+
+// Schema
+
+CREATE TABLE users(
+  id SERIAL PRIMARY KEY,
+  username VARCHAR(50)
+);
+
+CREATE TABLE photos (
+  id SERIAL PRIMARY KEY,
+  url VARCHAR(200),
+  user_id INTEGER REFERENCES users(id) ON DELETE CASCADE
+);
+
+CREATE TABLE comments (
+  id SERIAL PRIMARY KEY,
+  contents VARCHAR(240),
+  user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
+  photo_id INTEGER REFERENCES photos(id) ON DELETE CASCADE
+);
+
+CREATE TABLE employees (
+	id serial primary key,
+	name varchar(20) unique,
+	age integer,
+	department varchar(20) not null,
+	manager_id integer references employees(id) on delete set null
+);
+
+
