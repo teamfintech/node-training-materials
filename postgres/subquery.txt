@@ -1,0 +1,80 @@
+// Sub Query in SQL
+1. Sub queries are one of the most powerful SQL feature
+2. When a query is nested inside another query it is called sub query
+3. For understading sub query we need to understand the shape of the value returned from sub query
+4. Values return by a query can be in three form 
+    4.1 Scalars Ex: [4], nahid
+    4.2 Vectors Ex: [1, 2, 3, 4]
+    4.3 Matrix Ex: [
+        [1, 2, 3, 4],
+        [5, 6, 7, 8],
+        [9, 10, 11, 12]
+    ]
+5. Popular places for using Sub Query in SQL
+    5.1 SELECT
+    5.2 FROM
+    5.3 JOINS
+    5.4 WHERE
+    5.5 HAVING
+
+// Sub query in SELECT
+
+Query: Find all Products name and department with difference from max priced product
+SQL: 
+select name, department, ((select max(price) from products) - price) as diff
+from products;
+
+Note: sub queries in SELECT can only return Scalars
+
+// Sub Query in FROM and JOINS
+
+Query: Find the name, department, price and quantity of orders for all products
+SQL:
+select id, name, department, price, p2.quantity from products as p1 
+join (
+	select product_id, count(*) as quantity from orders
+	group by product_id
+) as p2
+on p1.id = p2.product_id
+order by id;
+
+Note: FROM and JOIN Sub Query can return Vectors and Matrix
+
+Exercise:
+Query: Find the name, department, price and quantity of orders for most ordered product
+
+
+// Sub Query in WHERE
+Query: Find all information of most expensive product
+SQL:
+select * from products
+where price = (
+	select max(price) from products
+);
+
+Query: Find name and price of the products which price is more than the max price of Industrial department
+SQL:
+select name, price from products
+where price > (
+	select max(price) from products
+	where department = 'Industrial'
+)
+
+Query: Find the product details that are not ordered yet
+SQL:
+select * from products
+where id not in (
+	select distinct(product_id) from orders
+);
+
+Note: Sub query in WHERE can return Scalars and Vectors
+
+// Correlated Sub Query
+Query: Find the name, department and price of the most expensive product in each department
+SQL:
+select name, department, price from products as p1
+where p1.price = (
+	select max(price) from products as p2
+	where p2.department = p1.department
+)
+order by department desc;
