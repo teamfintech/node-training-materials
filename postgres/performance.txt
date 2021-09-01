@@ -1,0 +1,53 @@
+// Resource
+https://www.datacamp.com/community/tutorials/sql-tutorial-query
+
+// Explore the data directory
+
+show data_directory;
+
+select oid, datname
+from pg_database;
+
+// Explore objects
+
+select * from pg_class;
+
+// How database store data
+1. Heap File
+2. Block/Pages
+3. Tuple/Item
+
+// What is an Index ?
+1. Index are structured pointers to the actual Block and Tuple
+2. They are stored as separate objects in database
+3. Maximize the search speed without making use of sequential search
+
+// create Index
+create index on users(first_name);
+
+// drop index
+drop index <index_name>
+
+// downside of index
+1. Disk Space consumption.
+2. Slow down Insert/Update/Delete
+3. Might not get used by Postgres
+
+// for testing space used by objects
+select pg_size_pretty(pg_relation_size('<object_name>'));
+
+select pg_size_pretty(pg_relation_size('users')) as table_size, 
+pg_size_pretty(pg_relation_size('users_first_name_idx')) as index_size;
+
+
+// query execution pipeline in Postgres
+1. Parser
+    1.1 Parse the SQL into a tree like structure
+    1.2 In this step the syntax error arise
+2. Rewriter
+    2.1 Rewrite certain portion of query for optimization
+3. Planner / Optimizer
+    3.1 Calculate the fastest route to execute the query
+4. Executor
+    4.1 Execute the query and fetch the Values
+
