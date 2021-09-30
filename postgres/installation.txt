@@ -34,5 +34,8 @@ $ psql
 // for connecting to a database 
 # \c <database name> <user name>
 
+// for password change of default user postgres
+# \password postgres
+
 
 
